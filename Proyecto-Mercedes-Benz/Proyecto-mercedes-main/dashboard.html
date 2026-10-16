@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz</title>
+    <link rel="icon" href="assets/icons/Mercedes-Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #444444; 
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .left-img {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .img-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .left-img span {
+            font-size: 22px;
+        }
+
+        .right-hamburguesa {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 38px;
+            height: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .right-hamburguesa span {
+            display: block;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s, width 0.3s;
+        }
+
+        .right-hamburguesa span:nth-child(1) { width: 100%; }
+        .right-hamburguesa span:nth-child(2) { width: 75%; }
+        .right-hamburguesa span:nth-child(3) { width: 55%; }
+        .right-hamburguesa.active span {
+            width: 100%;
+        }
+
+        .right-hamburguesa.active span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
+
+        .right-hamburguesa.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .right-hamburguesa.active span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
+
+        .menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: #444444;
+            padding: 10px 30px;
+            display: none;
+            z-index: 90;
+        }
+
+        .menu.open {
+            display: block;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 420px;
+            padding: 20px 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .menu a i {
+            width: 32px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .menu a:hover,
+        .menu a:active {
+            color: #b9a3ff;
+        }
+
+        .table-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 30px 20px 50px;
+        }
+
+        .table-card {
+            width: 100%;
+            max-width: 760px;
+            background-color: #707070;
+            border-radius: 28px;
+            padding: 28px 32px 32px;
+            overflow-x: auto;
+        }
+
+        .attendance-table {
+            width: 100%;
+            min-width: 480px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            border: 1px solid #d9d9d9;
+            height: 38px;
+            padding: 0 14px;
+            font-size: 15px;
+        }
+
+        .attendance-table th {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .attendance-table td:first-child {
+            text-align: left;
+        }
+
+        .attendance-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .zona-auto {
+            position: relative;
+            flex-shrink: 0;
+            width: 380px;
+            cursor: pointer;
+        }
+
+        .auto {
+            display: block;
+            width: 100%;
+            transform-origin: 50% 80%;
+            will-change: transform;
+            user-select: none;
+        }
+
+        .zona-auto.derrapa .auto {
+            animation: derrape 1.8s cubic-bezier(.2, .7, .2, 1) both;
+        }
+
+        @keyframes derrape {
+            0% {
+                opacity: 0;
+                transform: translateX(700px) skewX(-18deg) rotate(0deg);
+                filter: blur(6px);
+            }
+            15% {
+                opacity: 1;
+            }
+            38% {
+                transform: translateX(70px) skewX(-8deg) rotate(14deg);
+                filter: blur(1px);
+            }
+            60% {
+                transform: translateX(-24px) skewX(4deg) rotate(-8deg);
+                filter: blur(0);
+            }
+            80% {
+                transform: translateX(8px) skewX(-1deg) rotate(3deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) skewX(0) rotate(0deg);
+            }
+        }
+
+        .humo {
+            position: absolute;
+            bottom: 12%;
+            right: 8%;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(220, 220, 220, 0.55);
+            filter: blur(14px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .zona-auto.derrapa .humo {
+            animation: humo 1.4s ease-out both;
+        }
+
+        .humo:nth-of-type(2) { right: 18%; animation-delay: 0.15s !important; }
+        .humo:nth-of-type(3) { right: 0;   animation-delay: 0.3s  !important; }
+
+        @keyframes humo {
+            0%   { opacity: 0;    transform: translate(0, 0) scale(0.3); }
+            25%  { opacity: 0.75; }
+            100% { opacity: 0;    transform: translate(60px, -30px) scale(2.6); }
+        }
+
+        @media (max-width: 1250px) {
+            .table-view {
+                flex-direction: column;
+            }
+
+            .zona-auto {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 0 16px;
+            }
+
+            .left-img span {
+                font-size: 18px;
+            }
+
+            .table-card {
+                padding: 18px 14px 22px;
+            }
+
+            .zona-auto {
+                width: 240px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .zona-auto.derrapa .auto,
+            .zona-auto.derrapa .humo {
+                animation: none;
+                opacity: 1;
+            }
+
+            .humo {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="left-img" href="dashboard.html">
+        <img class="img-logo" src="assets/icons/Mercedes-Logo.ico" alt="Logo Mercedes-Benz">
+        <span>Mercedes-Benz</span>
+    </a>
+
+    <button class="right-hamburguesa" id="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<nav class="menu" id="menu">
+    <a href="asistencia.html"><i class="fa-solid fa-file-lines"></i>Attendance</a>
+    <a href="dashboard.html"><i class="fa-solid fa-users"></i>Coworkers</a>
+    <a href="index_Ejecutar.html" class="cerrar_sesion"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+</nav>
+
+<main class="table-view">
+    <div class="table-card">
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>Coworker</th>
+                    <th>Enrollment</th>
+                    <th>Exit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Perez</td>
+                    <td>08:00 AM</td>
+                    <td>05:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Maria Lopez</td>
+                    <td>08:05 AM</td>
+                    <td>05:02 PM</td>
+                </tr>
+                <tr>
+                    <td>Carlos Gomez</td>
+                    <td>07:55 AM</td>
+                    <td>05:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Ana Torres</td>
+                    <td>08:10 AM</td>
+                    <td>05:15 PM</td>
+                </tr>
+                <tr>
+                    <td>Luis Ramos</td>
+                    <td>08:00 AM</td>
+                    <td>05:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Elena Ruiz</td>
+                    <td>07:58 AM</td>
+                    <td>05:01 PM</td>
+                </tr>
+                <tr>
+                    <td>Pedro Diaz</td>
+                    <td>08:02 AM</td>
+                    <td>05:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Rosa Morales</td>
+                    <td>08:00 AM</td>
+                    <td>05:03 PM</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="zona-auto derrapa" id="zonaAuto" title="Haz clic para repetir el derrape">
+        <span class="humo"></span>
+        <span class="humo"></span>
+        <span class="humo"></span>
+        <img class="auto" src="assets/images/hyper_car.png" alt="Auto Mercedes-Benz">
+    </div>
+</main>
+
+<script>
+    const botonMenu = document.getElementById("btn-menu");
+    const menu = document.getElementById("menu");
+
+    botonMenu.addEventListener("click", function () {
+        const abierto = menu.classList.toggle("open");
+        botonMenu.classList.toggle("active", abierto);
+        botonMenu.setAttribute("aria-expanded", abierto);
+    });
+
+
+    const zonaAuto = document.getElementById("zonaAuto");
+
+    function derrapar() {
+        zonaAuto.classList.remove("derrapa");
+        void zonaAuto.offsetWidth;
+        zonaAuto.classList.add("derrapa");
+    }
+
+    zonaAuto.addEventListener("click", derrapar);
+    setInterval(derrapar, 12000);
+</script>
+
+</body>
+</html>

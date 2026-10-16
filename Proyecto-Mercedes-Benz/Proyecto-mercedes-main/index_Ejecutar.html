@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz</title>
+    <link rel="icon" href="assets/icons/Mercedes-Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #444444;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .encabezado {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 70px;
+            padding: 0 30px;
+        }
+
+        .encabezado img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .encabezado span {
+            font-size: 22px;
+        }
+
+        .pagina {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            min-height: calc(100vh - 70px);
+            padding: 20px;
+        }
+
+        .caja-login {
+            width: 420px;
+            background-color: #707070;
+            padding: 35px 40px 40px;
+            animation: cajaEntra 1.2s cubic-bezier(.2, .8, .2, 1) 0.6s both;
+            transition: transform 0.15s ease-out;
+            will-change: transform;
+        }
+
+        .caja-login h1 {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .campo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .campo i {
+            width: 34px;
+            font-size: 30px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .campo input {
+            flex: 1;
+            height: 40px;
+            padding: 0 20px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #ffffff;
+            background-color: #5c5c5c;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .campo input::placeholder {
+            color: #e0e0e0;
+        }
+
+        .olvido {
+            display: block;
+            margin: -8px 0 18px 46px;
+            font-size: 11px;
+            color: #6aa2ff;
+            text-decoration: none;
+        }
+
+        .boton {
+            margin-left: 46px;
+            padding: 8px 34px;
+            font-family: inherit;
+            font-size: 17px;
+            color: #111111;
+            background-color: #eeeeee;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background-color: #ffffff;
+        }
+
+        .auto {
+            width: 380px;
+
+            animation:
+                autoEntra 1.4s cubic-bezier(.2, .8, .2, 1) 0.2s both,
+                flotar 3s ease-in-out 1.6s infinite;
+            transition: transform 0.15s ease-out;
+            will-change: transform;
+        }
+        @keyframes autoEntra {
+            from { opacity: 0; translate: 400px 0; }
+            to   { opacity: 1; translate: 0 0; }
+        }
+
+        @keyframes cajaEntra {
+            from { opacity: 0; translate: 300px 0; scale: 0.9; }
+            to   { opacity: 1; translate: 0 0; scale: 1; }
+        }
+
+        @keyframes flotar {
+            0%, 100% { translate: 0 0; }
+            50%      { translate: 0 -10px; }
+        }
+
+        @keyframes temblor {
+            0%, 100% { transform: translateX(0); }
+            25%      { transform: translateX(-6px); }
+            75%      { transform: translateX(6px); }
+        }
+        @media (max-width: 900px) {
+            .pagina {
+                flex-direction: column;
+            }
+
+            .caja-login {
+                width: 100%;
+                max-width: 420px;
+            }
+
+            .auto {
+                width: 280px;
+            }
+        }
+        .mensaje-error {
+            margin: -6px 0 14px 46px;
+            font-size: 12px;
+            color: #ffb4b4;
+        }
+
+        .mensaje-error.temblar {
+            animation: temblor 0.4s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .auto, .caja-login {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="encabezado">
+        <img src="assets/icons/Mercedes-Logo.ico" alt="Logo Mercedes-Benz">
+        <span>Mercedes-Benz</span>
+    </header>
+
+    <main class="pagina">
+
+        <div class="caja-login">
+            <h1>USER LOGIN</h1>
+
+            <form id="formLogin">
+                <div class="campo">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="email" id="email" name="email" placeholder="Email ID" required>
+                </div>
+
+                <div class="campo">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <a href="#" class="olvido">Forgot your password?</a>
+
+                <p class="mensaje-error" id="mensajeError" hidden></p>
+
+                <button type="submit" class="boton">LOGIN</button>
+            </form>
+        </div>
+
+        <img class="auto" src="assets/images/hyper_car.png" alt="Auto Mercedes-Benz">
+
+    </main>
+
+    <script>
+        const CORREO_CORRECTO = "owner@gmail.com";
+        const CLAVE_CORRECTA = "123";
+
+        const formulario = document.getElementById("formLogin");
+        const mensajeError = document.getElementById("mensajeError");
+
+        formulario.addEventListener("submit", function (evento) {
+            evento.preventDefault();
+
+            const correo = document.getElementById("email").value.trim();
+            const clave = document.getElementById("password").value;
+
+            if (correo === CORREO_CORRECTO && clave === CLAVE_CORRECTA) {
+                window.location.href = "dashboard.html";
+            } else {
+                mensajeError.textContent = "Incorrect email or password.";
+                mensajeError.hidden = false;
+                mensajeError.classList.remove("temblar");
+                void mensajeError.offsetWidth;
+                mensajeError.classList.add("temblar");
+            }
+        });
+        const caja = document.querySelector(".caja-login");
+        const auto = document.querySelector(".auto");
+
+        document.addEventListener("mousemove", function (e) {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            auto.style.transform = `translate(${x * 25}px, ${y * 15}px) rotate(${x * 2}deg)`;
+            caja.style.transform = `translate(${x * 8}px, ${y * 5}px)`;
+        });
+    </script>
+
+</body>
+</html>

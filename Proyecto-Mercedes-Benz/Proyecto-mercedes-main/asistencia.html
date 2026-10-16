@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz</title>
+    <link rel="icon" href="assets/icons/Mercedes-Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #444444;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .left-img {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .img-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .left-img span {
+            font-size: 22px;
+        }
+
+        .right-hamburguesa {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 38px;
+            height: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .right-hamburguesa span {
+            display: block;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s, width 0.3s;
+        }
+
+        .right-hamburguesa span:nth-child(1) { width: 100%; }
+        .right-hamburguesa span:nth-child(2) { width: 75%; }
+        .right-hamburguesa span:nth-child(3) { width: 55%; }
+
+        .right-hamburguesa.active span {
+            width: 100%;
+        }
+
+        .right-hamburguesa.active span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
+
+        .right-hamburguesa.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .right-hamburguesa.active span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
+
+        .menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: #444444;
+            padding: 10px 30px;
+            display: none;
+            z-index: 90;
+        }
+
+        .menu.open {
+            display: block;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 420px;
+            padding: 20px 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .menu a i {
+            width: 32px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .menu a:hover,
+        .menu a:active {
+            color: #b9a3ff;
+        }
+
+        .scan-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+            padding: 20px;
+        }
+
+        .scan-card {
+            width: 100%;
+            max-width: 340px;
+            background-color: #000000;
+            padding: 40px 28px 34px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 26px;
+        }
+
+        .scanner {
+            position: relative;
+            width: 230px;
+            height: 230px;
+        }
+
+        .scanner-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-conic-gradient(#ffffff 0 1.5deg, transparent 1.5deg 5deg);
+            -webkit-mask: radial-gradient(circle, transparent 66%, #000 67%);
+            mask: radial-gradient(circle, transparent 66%, #000 67%);
+            animation: girar 14s linear infinite;
+        }
+
+        .scanner-face {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scanner-line {
+            position: absolute;
+            left: 22%;
+            width: 56%;
+            height: 3px;
+            border-radius: 2px;
+            background-color: #7c5cff;
+            box-shadow: 0 0 10px 2px rgba(124, 92, 255, 0.8);
+            animation: escanear 2.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes girar {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes escanear {
+            from { top: 30%; }
+            to   { top: 70%; }
+        }
+
+        .scan-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #f2f2f2;
+            max-width: 270px;
+        }
+
+        .scan-button {
+            font-family: inherit;
+            font-size: 15px;
+            color: #ffffff;
+            background-color: #6c4fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 54px;
+            cursor: pointer;
+        }
+
+        .scan-button:hover {
+            background-color: #5a3ee6;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .scanner-ring,
+            .scanner-line {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 0 16px;
+            }
+
+            .left-img span {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="left-img" href="dashboard.html">
+        <img class="img-logo" src="assets/icons/Mercedes-Logo.ico" alt="Logo Mercedes-Benz">
+        <span>Mercedes-Benz</span>
+    </a>
+
+    <button class="right-hamburguesa" id="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<nav class="menu" id="menu">
+    <a href="asistencia.html"><i class="fa-solid fa-file-lines"></i>Attendance</a>
+    <a href="dashboard.html"><i class="fa-solid fa-users"></i>Coworkers</a>
+    <a href="index_Ejecutar.html" class="cerrar_sesion"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+</nav>
+
+<main class="scan-view">
+    <section class="scan-card">
+
+        <div class="scanner">
+            <div class="scanner-ring"></div>
+            <svg class="scanner-face" viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                <circle cx="50" cy="50" r="22"/>
+                <line x1="42" y1="43" x2="42" y2="49"/>
+                <line x1="58" y1="43" x2="58" y2="49"/>
+                <path d="M41 57 Q50 65 59 57"/>
+            </svg>
+            <div class="scanner-line"></div>
+        </div>
+
+        <p class="scan-text">
+            First, position your face in the camera frame.
+            Then move your face in a circle to show all angles of your face.
+        </p>
+
+        <button type="button" class="scan-button">Get Started</button>
+
+    </section>
+</main>
+
+<script>
+    const botonMenu = document.getElementById("btn-menu");
+    const menu = document.getElementById("menu");
+
+    botonMenu.addEventListener("click", function () {
+        const abierto = menu.classList.toggle("open");
+        botonMenu.classList.toggle("active", abierto);
+        botonMenu.setAttribute("aria-expanded", abierto);
+    });
+</script>
+
+</body>
+</html>

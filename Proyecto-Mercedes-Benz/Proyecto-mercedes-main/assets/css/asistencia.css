@@ -1,0 +1,118 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 30px;
+  width: 100%;
+}
+
+.logo-box {
+  padding: 6px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.logo-senati {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.avatar-box {
+  width: 30%;
+  max-width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.user-name {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.camera-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1.08;
+  border: 7px solid #ffffff;
+  border-radius: 36px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.corner {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-color: #ffffff;
+  border-style: solid;
+}
+
+.top-left {
+  top: 36px;
+  left: 42px;
+  border-width: 3px 0 0 3px;
+  border-top-left-radius: 6px;
+}
+
+.top-right {
+  top: 36px;
+  right: 42px;
+  border-width: 3px 3px 0 0;
+  border-top-right-radius: 6px;
+}
+
+.bottom-left {
+  bottom: 46px;
+  left: 42px;
+  border-width: 0 0 3px 3px;
+  border-bottom-left-radius: 6px;
+}
+
+.bottom-right {
+  bottom: 46px;
+  right: 42px;
+  border-width: 0 3px 3px 0;
+  border-bottom-right-radius: 6px;
+}
